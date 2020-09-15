@@ -1,0 +1,11 @@
+elasticsearch/
+kibana/
+logstash/
+extensions/
+.env
+docker-stack.yml
+__pycache__
+SentimentAnalysis/data/
+SentimentAnalysis/.idea/
+SentimentAnalysis/.ipynb_checkpoints/
+secret.py
