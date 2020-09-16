@@ -6,4 +6,4 @@ Sentiment Analysis and visualisation of tweets, using python, Easticsearch, logs
 
 
 ## Kibana Dashboard
-![demo](https://github.com/amine-akrout/real-time-twitter-sentiment-analysis/blob/master/demo/twitter.PNG)
+![demo](https://github.com/amine-akrout/real-time-twitter-sentiment-analysis/blob/master/demo/twitter_kibana.PNG)
