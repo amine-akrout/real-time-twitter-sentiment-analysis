@@ -30,7 +30,7 @@ vectorize_layer = TextVectorization(
 def sentimentprediction(text):
     clean = custom_standardization(text)
     vec = vectorize_layer(tf.expand_dims(clean, -1))
-    if model.predict(vec) > 0.5:
+    if model.predict(vec) < 0.5:
         sentiment = "positive"
     else:
         sentiment  = "negative"
