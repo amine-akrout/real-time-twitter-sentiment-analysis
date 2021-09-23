@@ -1,37 +1,25 @@
-import tensorflow as tf 
-from tensorflow.keras.layers.experimental.preprocessing import TextVectorization
+#Import libraries
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.preprocessing.text import tokenizer_from_json
 from tensorflow.keras.models import load_model
-import re
-import string
-print(tf.__version__)
-model = load_model('SentimentAnalysis/sentiment_model.h5')
+import json
+# import model and tokenizer
+with open('tokenizer.json') as f:
+    data = json.load(f)
+    tokenizer = tokenizer_from_json(data)
+clf = load_model('model.h5')
 
-
-
-def custom_standardization(input_data):
-    lowercase = tf.strings.lower(input_data)
-    stripped_html = tf.strings.regex_replace(lowercase, "<br />", " ")
-    return tf.strings.regex_replace(
-        stripped_html, "[%s]" % re.escape(string.punctuation), ""
-    )
-
-max_features = 5000
-embedding_dim = 128
-sequence_length = 500
-
-
-vectorize_layer = TextVectorization(
-    standardize=custom_standardization,
-    max_tokens=max_features,
-    output_mode="int",
-    output_sequence_length=sequence_length,
-)
-
-def sentimentprediction(text):
-    clean = custom_standardization(text)
-    vec = vectorize_layer(tf.expand_dims(clean, -1))
-    if model.predict(vec) < 0.5:
+# make a prediction with loaded model
+def sentimentprediction(comment):
+    data = [comment]
+    vect = tokenizer.texts_to_sequences(data)
+    vect = pad_sequences(vect, padding='post', maxlen=500)
+    prediction = clf.predict_classes(vect)[0][0]
+    if prediction > 0.5:
         sentiment = "positive"
     else:
-        sentiment  = "negative"
+        sentiment = "negative"
     return sentiment
+
+
+#comment= "بكون مش عارف دا حلم ولا حقيقه وبعد لما بصحي بدور علي الحاجه اللي حلمت بيها"

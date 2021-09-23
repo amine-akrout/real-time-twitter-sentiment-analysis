@@ -8,10 +8,7 @@ from datetime import datetime
 from kafka import KafkaProducer
 from secret import *
 from utilis import * 
-from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from preprocessor.api import clean
 
-analyzer = SentimentIntensityAnalyzer()
 producer = KafkaProducer(bootstrap_servers=['localhost:9092'])
 
 
@@ -73,6 +70,7 @@ class TweetListener(StreamListener):
         return True
 
 words = ['كورونا']
+
 debug = True
 topic = "twitter"
 

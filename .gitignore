@@ -9,3 +9,4 @@ SentimentAnalysis/data/
 SentimentAnalysis/.idea/
 SentimentAnalysis/.ipynb_checkpoints/
 secret.py
+model.h5
